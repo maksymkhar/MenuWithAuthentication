@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
+
+
+    \Debugbar::info("Hi debug !");
+
     return view('welcome');
 });
