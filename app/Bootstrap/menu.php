@@ -12,7 +12,7 @@ MenuWithAuthentication::menu()
     ->title('Home')
     ->icon('fa-home')
     ->url('/home')
-    ->rol('home')
+    ->role('home')
     ->permission('home')
     ->user('max');
 

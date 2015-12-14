@@ -25,7 +25,7 @@ class MenuItem
     /**
      * @var
      */
-    protected $url;
+    protected $url = null;
     /**
      * @var
      */
@@ -135,5 +135,26 @@ class MenuItem
         $this->user = $user;
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->render();
+    }
+
+    private function render()
+    {
+        $data = array();
+
+        $data['url'] = $this->url;
+        $data['title'] = $this->title;
+        $data['icon'] = $this->icon;
+//        $data['permission'] = $this->permission;
+//        $data['role'] = $this->role;
+//        $data['user'] = $this->user;
+
+
+        return (String) view('menu.menuitem', $data);
+    }
+
 
 }
