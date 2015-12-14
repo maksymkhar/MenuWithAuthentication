@@ -13,8 +13,12 @@
 
 Route::get('/', function () {
 
-
     \Debugbar::info("Hi debug !");
-
     return view('welcome');
 });
+
+
+view()->composer(
+    'partials.sidebar',
+    'MenuWithAuthentication\Http\ViewComposers\SidebarComposer'
+);
