@@ -21,7 +21,7 @@ class MenuItem
     /**
      * @var
      */
-    protected $icon;
+    protected $icon = null;
     /**
      * @var
      */
@@ -38,12 +38,59 @@ class MenuItem
      * @var
      */
     protected $user;
+    /**
+     * @var
+     */
+    public static $current;
+    /**
+     * @var
+     */
+    private $id;
+    /**
+     * Menu item depth level
+     * @var int
+     */
+    protected $level;
+    /**
+     * Menu item subitems
+     * @var MenuItem[]
+     */
+    protected $subItems = [];
 
     /**
      * MenuItem constructor.
      */
-    public function __construct()
+    public function __construct($id)
     {
+        $this->id = $id;
+
+        if (is_null(static::$current))
+        {
+            static::$current = $this;
+            $this->level(0);
+        }
+        else
+        {
+            static::$current->addItem($this);
+            $this->level(static::$current->level() + 1);
+        }
+    }
+
+    public function addItem($item)
+    {
+        $this->subItems[] = $item;
+        return $this;
+    }
+
+    public function level($level = null)
+    {
+        if ($level == null)
+        {
+            return $this->level;
+        }
+
+        $this->level = $level;
+        return $this;
     }
 
     /**
@@ -136,15 +183,22 @@ class MenuItem
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->render();
     }
 
+    /**
+     * @return string
+     */
     private function render()
     {
         $data = array();
 
+        $data['id'] = $this->id;
         $data['url'] = $this->url;
         $data['title'] = $this->title;
         $data['icon'] = $this->icon;
@@ -154,6 +208,14 @@ class MenuItem
 
 
         return (String) view('menu.menuitem', $data);
+    }
+
+    public function items()
+    {
+        $old = static::$current;
+        static::$current = $this;
+        static::$current = $old;
+        return $this;
     }
 
 

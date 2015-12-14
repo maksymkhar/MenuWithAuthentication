@@ -1,14 +1,8 @@
 <?php
 
 namespace MenuWithAuthentication\Http\ViewComposers;
-
-/**
- * Created by PhpStorm.
- * User: max
- * Date: 14/12/15
- * Time: 17:10
- */
 use Illuminate\Contracts\View\View;
+use MenuWithAuthentication\MenuWithAuthentication;
 
 /**
  * Class SidebarComposer
@@ -30,7 +24,8 @@ class SidebarComposer
 
     private function getSideBarMenu()
     {
-        $menu = MenuWithAuthentication::instance()->getMenu();
-        return array($menu);
+        return array();
+        //$menu = MenuWithAuthentication::instance()->getMenu();
+        //return array($menu);
     }
 }

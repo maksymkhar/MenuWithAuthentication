@@ -1,12 +1,12 @@
-<li class="active">
-    @if ($url != null)
+<li class="active" id="{{ $id }}">
+    @if ($url!= null)
         <a href="{{ $url }}">
-    @endif
-        @if ($icon != null)
-            <i class='fa {{ $icon }}'></i>
-        @endif
+            @endif
+            @if ($icon!= null)
+                <i class='fa {{ $icon }}'></i>
+            @endif
             <span>{{ $title }}</span>
-    @if ($url != null)
+            @if ($url!= null)
         </a>
     @endif
 </li>
